@@ -7,6 +7,10 @@
 
 [downlaod_link_blog](https://sharafat.is-a.dev/notes/oracle-db/)
 
+**01. Run in terminals:**
+```bash
+    podman exec -it oracle-yasin sqlplus system/12345@localhost:1521/free
+```
 
 <br>
 <br>
@@ -37,6 +41,7 @@
 <br>
 
 # `1. **Oracle-এ ডাটাবেস এবং টেবিল তৈরি করার প্রক্রিয়া:**`  
+podman exec -it oracle-yasin sqlplus system/12345@localhost:1521/free
 
 Oracle-এ সরাসরি একটি ডাটাবেস তৈরি করা যায় না যেভাবে MySQL-এ করা যায়। Oracle-এ "ডাটাবেস" বলতে একটি সম্পূর্ণ **Instance** বোঝায়। তবে, আপনি একটি **User Schema** তৈরি করতে পারেন এবং তাতে টেবিল তৈরি করতে পারেন।  
 
