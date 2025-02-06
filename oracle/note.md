@@ -40,6 +40,24 @@
 
 <br>
 
+**1. Change linesize and pagesize in terminal:**
+
+```bash
+SET LINESIZE 200;
+SET PAGESIZE 50;
+```
+
+**2. Show all the created table:**
+```bash 
+select table_name from user_tables;
+```
+**3. see the schema of a table:**
+```bash
+DESCRIBE table_name;
+```
+
+<br>
+
 # `1. **Oracle-এ ডাটাবেস এবং টেবিল তৈরি করার প্রক্রিয়া:**`  
 podman exec -it oracle-yasin sqlplus system/12345@localhost:1521/free
 
