@@ -1,3 +1,14 @@
+# `#NUMBERING:`
+
+- 01 -> My sql with xampp
+- 02 -> Edge Class University database
+- 03 -> Some datatype 
+- 04 -> Join in Sql
+- 05 -> Aggeregate Function
+- 06 -> Group By and Having
+- 07 -> Self Join, Union and Union all
+- 08 -> Sub Query
+
 <br>
 
 # `#01 My sql with xmapp:`
@@ -188,6 +199,12 @@ create table prereq
 - char(5): `memory size always fix.`
 - varchar(5) : `vary the memory size. "ab" -> it takes memory for two character from primary memory.`
 
+<br>
+
+# `#03 Some Datatype in Sql;`
+
+<br>
+
 ### **`# NUMERIC(12,2)`**:
 1. **সংজ্ঞা:**  
    - `NUMERIC(12,2)` এর অর্থ হলো:  
@@ -236,8 +253,6 @@ create table prereq
 - `CASCADE` -> চাইল্ড রেকর্ডও মুছে যায়।  
 
 
-# `# Query on Table:`
-
 - Show all the tables:
     ```sql
     show tables;
@@ -249,7 +264,11 @@ decscribe table_name
 
 ```
 
-#  `#Join in SQL`
+<br>
+
+#  `# 04 Join in SQL`
+
+<br>
 
 JOIN দিয়ে আমরা দুই বা ততোধিক table এর output কে  combine করতে পারি । কিন্তু, condition হচ্ছে, এদের মধ্যে common, column থাকতে হবে  থাকতে হবে ।
 
@@ -267,6 +286,223 @@ JOIN দিয়ে আমরা দুই বা ততোধিক table এর 
 # `# Inner Join:`
 
 ![image](img/img02.gif)
+
+এই উদাহরণে, `inner_join(x, y)` অপারেশনটি দুটি টেবিল বা ডেটা সেট `x` এবং `y` কে তাদের কমন কলামের ভিত্তিতে join করছে। `inner_join` শুধুমাত্র সেই রেকর্ডগুলো রিটার্ন করে যেগুলো উভয় টেবিলে ম্যাচ করে।
+
+### ডেটা সেট `x` এবং `y`:
+- `x` টেবিলে কলাম: `id`, `value_x`
+- `y` টেবিলে কলাম: `id`, `value_y`
+
+ডেটা সেট `x`:
+```
+id | value_x
+1  | x1
+2  | x2
+3  | x3
+```
+
+ডেটা সেট `y`:
+```
+id | value_y
+1  | y1
+2  | y2
+4  | y4
+```
+
+### `inner_join(x, y)` এর আউটপুট:
+```
+id | value_x | value_y
+1  | x1      | y1
+2  | x2      | y2
+```
+
+### ব্যাখ্যা:
+- `id` 1 এবং 2 উভয় টেবিল `x` এবং `y` তে উপস্থিত আছে। তাই, এই রেকর্ডগুলো `inner_join` এর আউটপুটে দেখানো হয়েছে।
+- `id` 3 শুধুমাত্র `x` টেবিলে আছে এবং `id` 4 শুধুমাত্র `y` টেবিলে আছে। যেহেতু এই `id` গুলো উভয় টেবিলে ম্যাচ করে না, তাই এগুলো `inner_join` এর আউটপুটে দেখানো হয়নি।
+
+এইভাবে, `inner_join` শুধুমাত্র সেই রেকর্ডগুলো রিটার্ন করে যেগুলো উভয় টেবিলে কমন কলামের ভিত্তিতে ম্যাচ করে।
+
+
+Syntax:
+```sql
+SELECT column_name
+FROM TableA
+INNER JOIN TableB
+ON TABLE.col_Name = TABLE.col_name
+```
+`দুই ক্ষেত্রেই TABLE.col_Name সেম হতে হবে । `
+
+
+**Example:** 
+
+```sql
+SELECT * 
+FROM customer AS c
+INNER JOIN paymnet AS p
+ON c.customer_id = p.customer_id
+```
+
+# `# LEFT JOIN, RIGHT JOIN, FULL OUTTER JOIN`
+
+![image](img/img03.gif)
+
+![image](img/img04.gif)
+
+![image](img/img05.gif)
+
+<br>
+
+**revise all:**
+
+![image](img/img06.jpeg)
+
+
+# `# 05 Aggregate Function:`
+
+
+<br>
+
+# `# 06 Group By and Having:`
+
+<br>
+
+### Group By:
+
+** `Aggregate function use করলে আমাদের GROUP BY ব্যবহার করতেই হবে । না হলে error আসবে ।`**
+
+![image](img/img07.png)
+
+এখানে, mode এ  Cash, Credit Card, Debit Card সহ নানা মাধ্যম ব্যবহার করেছে । এখন, ব্যবহার করে কত টাকা পয়সা আদান প্রধান করা হয়েছে,  যদি সেইটা জানতে চায় তাহলে আমরা, Aggegate function এর পাশাপাশি group by clause ব্যবহার করতেই হবে । 
+
+![image](img/img08.png)
+
+**with order by:**
+
+```sql
+SELECT mode, SUM(amount)  AS total
+FROM payment 
+GROUP BY mode
+ORDER BY total ASC
+```
+
+### Having:
+
+`SELECT এর সাথে CONDITION যোগ করার জন্য আমরা Where ব্যবহার করতাম আর group by এর সাথে কোন CONDITION যোগ করার জন্য আমরা Having ব্যবহার করবো । group by এর পর Having ব্যবহার করবো, যদি আগে করি তাহলে error দিবে । `
+
+Let's see an example,
+
+Without implement having clause,
+![image](img/img09.png)
+
+With having clause single condition,
+![image](img/img10.png)
+
+With having clause multiple condition,
+![image](img/img11.png)
+
+
+Visulization: 
+
+![image](img/img12.gif)
+
+<br>
+<br>
+
+# `# 7. Self Join, UNION and UNION ALL`
+
+আমরা যখন, একই table এর দুইটা column এর মধ্যে তুলনা করতে চাই তখন আমাদের self join দরকার হয় । 
+
+**Syntax:**
+```sql
+SELECT column_name(s)
+FROM Table AS T1
+JOIN Table AS T2 
+ON T1.col_name = T2.col_name
+```
+
+### Read the question from the image:
+
+![image](img/img12.png)
+
+**ANSWER:** <br>
+
+![image](img/img13.png)
+
+But i need only the manager name of my employee:
+
+![image](img/img14.png)
+
+### UNION:
+
+দুইটা  table combine/concatenate করার জন্য । Union করার ফলে আমরা unique recoards পাই ।  যেখানে, কোন logic implement করা লাগে না । Union implement করার জন্য আমাদের কিছু মাথায় রাখতে হবেঃ
+
+- Same number of columns and data type and same order
+
+### UNION ALL 
+
+Same to same UNION কিন্ত, আমরা এখানে, duplicate value পায় । 
+
+### Example Question:
+`Use UNION and UNION ALL:`
+![image](img/img15.png)
+
+**ANS:** we got 4 rows because UNION Does not allow duplicate value.
+![image](img/img16.png)
+
+**ANS:** we got 5 rows because UNION ALL operation allow duplicate value.
+
+
+<br>
+<br>
+
+# `# Sub-Query:`
+
+<br>
+
+কোন query করলে আমরা তার যে output পাবো, তারউপর আবার query করা হলে, প্রথমে যে  query করেছিলাম তাকে আমরা subquery বলি । 
+
+**Syntax:**
+
+```sql 
+SELECT column_name(s)
+FROM  table_name
+WHERE column_name operator
+(SELECT column_name FROM table_name)
+```
+
+**Question:**
+![image](img/img18.png)
+
+i) Find  the average value:
+```sql
+select avg(amount) from payment
+```
+**output: 164**
+
+ii) finter the custom data > avg. value
+
+```sql
+SELECT * 
+FROM payment
+where amount>164
+```
+উপরের apporach এ ans করালে সেইটা static হবে । dynamic হবে না ।
+
+**Final Ans:**
+```sql
+SELECT * 
+FROM payment
+where amount > (select avg(amount) from payment)
+```
+
+
+
+# `# Question:`
+SELECT,FROM,WHERE,GROUP BY,HAVING,ORDER BY,LIMIT list down the exection order.
+
+**ANSWER:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+
+
 
 
 
