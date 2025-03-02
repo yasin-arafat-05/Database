@@ -245,8 +245,28 @@ create table prereq
 - Show all the tables with metadata:
 
 ```sql
+decscribe table_name
 
 ```
+
+#  `#Join in SQL`
+
+JOIN দিয়ে আমরা দুই বা ততোধিক table এর output কে  combine করতে পারি । কিন্তু, condition হচ্ছে, এদের মধ্যে common, column থাকতে হবে  থাকতে হবে ।
+
+**Types of join:**
+- Inner join
+- Left join
+- Right join
+- Full Outer join 
+<br>
+
+![image](img/img01.png)
+
+<br>
+
+# `# Inner Join:`
+
+![image](img/img02.gif)
 
 
 
