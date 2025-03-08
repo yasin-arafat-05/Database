@@ -8,6 +8,8 @@
 - 06 -> Group By and Having
 - 07 -> Self Join, Union and Union all
 - 08 -> Sub Query
+- 09 -> Windows Function:
+- 10 -> Case Expression
 
 <br>
 
@@ -455,8 +457,9 @@ Same to same UNION কিন্ত, আমরা এখানে, duplicate valu
 <br>
 <br>
 
-# `# Sub-Query:`
+# `#08 Sub-Query:`
 
+<br>
 <br>
 
 কোন query করলে আমরা তার যে output পাবো, তারউপর আবার query করা হলে, প্রথমে যে  query করেছিলাম তাকে আমরা subquery বলি । 
@@ -486,7 +489,7 @@ SELECT *
 FROM payment
 where amount>164
 ```
-উপরের apporach এ ans করালে সেইটা static হবে । dynamic হবে না ।
+উপরের apporach এ ans করালে সেইটা static হবে । dynamic হবে না । তাই, যে query ব্যবহার করে 164 পেয়েছি সেইটা (first bracket) দিয়ে query টা দিব । 
 
 **Final Ans:**
 ```sql
@@ -495,7 +498,162 @@ FROM payment
 where amount > (select avg(amount) from payment)
 ```
 
+### `*উপরে sub-query এর result এ একটা value (164) পেয়েছি । যদি  এখানে, multiple vlaue পেতাম তাহলে কীভাবে query করতাম????*`
 
+**ANS:** আমরা আগের বার comparasion operator ব্যবহার  করেছি । এখন, আমরা logical operator **IN, Exists** ব্যবহার করবো । 
+
+<br>
+
+With IN:
+![image](img/img20.png)
+
+<br>
+
+With Exists:
+![image](img/img21.png)
+
+<br>
+
+
+<br>
+<br>
+
+# `# 09 Windows Function in SQL:`
+
+<br>
+<br>
+
+![image](img/img27.png)
+![image](img/img28.png)
+
+<br>
+<br>
+
+## 01: Aggeregate Function:
+### Partition by and Order by: `(We do partition here)`
+![image](img/img22.png)
+
+
+### Rows clause: `(We don't do partition here)`
+![image](img/img22.png)
+
+
+## 02: Ranking Function: 
+![image](img/img23.png)
+
+## 03: Analytic function:
+![image](img/img24.png)
+
+### LEAD,LAG BY a particular number:
+![image](img/img25.png)
+
+
+<br>
+<br>
+
+# `# 10 CASE EXPRESSION:`
+
+<br>
+<br>
+
+**Case Expression:** The case expression goes through conditions and return a value when the first condition is met(like if-then-else statement). If no conditions are true, it returns the value in the ELSE clause.
+
+If  there is no ELSE part and no conditins are true, it returns NULL.
+
+<br>
+
+**General Case Statement:**
+```sql 
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result1
+    WHEN condition3 THEN result1
+    ELSE other_result
+END;
+```
+**Example:**
+```sql
+SELECT customer_id, amount,
+    CASE
+        WHEN amount > 100 THEN 'Expensive product'
+        WHEN amount = 100 THEN 'MOderate product'
+        ELSE 'Inexpensive product'
+    END AS ProductStatus 
+    FROM payment;
+```
+
+![image](img/img29.png)
+
+<br>
+
+
+## **General Case Expression:**
+
+```sql 
+CASE Expression
+    WHEN value1 THEN result1
+    WHEN value2 THEN result1
+    WHEN value3 THEN result1
+    ELSE other_result
+END;
+```
+**Example:**
+```sql
+SELECT customer_id,
+    CASE amount
+        WHEN 500 THEN 'Prime Customer'
+        WHEN 100 THEN 'Plus Customer'
+        ELSE 'Regular Customer'
+    END AS ProductStatus 
+    FROM payment;
+```
+
+<br>
+
+![image](img/img30.png)
+
+<br>
+<br>
+<br>
+
+# `# CTE: Common Table Expression:`
+
+<br>
+<br>
+<br>
+
+## `Common Table Expression(CTE):`
+
+- A common table expression, or CTE, is a temporary named result set created from a simple SELECT statement that can be used in a subsequent SELECT statement.
+
+- We can define CTEs by adding a WITH clause directly before SELECT, INSERT, UPDATE, DELETE or MERGE statement.
+
+- The WITH clause can include one or more CTES statement by commas.
+
+**Syntax:**
+```sql
+--- CTEs Query:
+WITH my_cte AS(
+    SELECT a,b,c 
+    FROM Table1)
+
+--- Main Query:
+Select a,c FROM my_cte 
+```
+**payment table:** <br>
+![image](img/img31.png)
+
+**customer table:** <br>
+![image](img/img32.png)
+
+**all the result save in a temporary table name: my_cte:**
+![image](img/img33.png)
+
+`যদি আলাদা করে my_cte run করি হবে না কারণ, এইটা with clause এর সাথে ।`
+![image](img/img34.png)
+
+## we can write multiple CTEs command:
+![image](img/img35.png)
 
 # `# Question:`
 SELECT,FROM,WHERE,GROUP BY,HAVING,ORDER BY,LIMIT list down the exection order.
