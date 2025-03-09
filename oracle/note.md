@@ -103,5 +103,36 @@ SELECT instance_name FROM v$instance;
 ---
 
 <br>
+<br>
 
+# `# Error Handingling trigger:`
+
+<br>
+<br>
+
+```sql
+SQL> update bookself set rating=3 where book_id=1;
+update bookself set rating=3 where book_id=1
+       *
+ERROR at line 1:
+ORA-04098: trigger 'SYSTEM.UPDATE_BOOK_RATING' is invalid and failed
+re-validation
+Help: https://docs.oracle.com/error-help/db/ora-04098/
+
+
+SQL> alter trigger update_book_rating disable;
+
+Trigger altered.
+
+SQL> update bookself set rating=3 where book_id=4;
+
+1 row updated.
+SQL> select * from bookself_audit;
+
+   BOOK_ID OLD_RATING NEW_RATING CHANGE_DA
+---------- ---------- ---------- ---------
+         4          5          3 09-MAR-25
+
+SQL>
+```
 
