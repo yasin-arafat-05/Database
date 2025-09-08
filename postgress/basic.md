@@ -7,16 +7,23 @@
 
 
 
-## ✅ Summary of the nodebook:
+## ✅ Summary of the notebook:
 
-- 1. Install & start PostgreSQL
-- 2. Understand **default superuser (`postgres`)**
-- 3. Create roles & users with least privilege
-- 4. Manage DB, schema, tables
-- 5. Use `GRANT` / `REVOKE` for security
-- 6. Monitor sessions & locks
-- 7. Automate with functions & triggers
-- 8. Backup & restore safely
+
+- `#01. Installation & Service:`
+- `#02. Default User & Roles:`
+- `#03. Create & Manage Roles:`
+- `#04. Database Management:`
+- `#05. Schema Management:`
+- `#06. Table Management:`
+- `#07. User Privileges:`
+- `#08. Security Best Practices:`
+- `#09. Transactions:`
+- `#10. Functions & Stored Procedures:`
+- `#11. Trigger:`
+- `#12. Monitoring & Diagnostics:`
+- `#13. Backup & Restore:`
+- `#14. Connect with GUI Tools:`
 
 
 
@@ -278,7 +285,7 @@ $$ LANGUAGE plpgsql;
 
 <br>
 
-# `#10. Trigger:`
+# `#11. Trigger:`
 
 <br>
 
