@@ -58,6 +58,13 @@ systemctl status postgresql
 * Has full privileges (`SUPERUSER`, `CREATEDB`, `CREATEROLE`, `REPLICATION`)
 * Do not use `postgres` directly in apps. Create dedicated users.
 
+Go to psql shell
+
+```bash
+sudo -iu postgres
+psql
+```
+
 Check current session:
 
 ```sql
