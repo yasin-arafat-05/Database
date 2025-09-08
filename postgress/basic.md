@@ -85,23 +85,50 @@ List all roles:
 <br>
 
 ```sql
--- Create basic user
+-- 1️⃣ Create basic user
+-- Purpose: Regular user for applications, can login and work with assigned databases
 CREATE USER myuser WITH PASSWORD 'mypassword';
 
--- Create role with login
+-- 2️⃣ Create a new database and assign owner
+-- Purpose: The user 'myuser' will own this database. Owning allows full control over this db
+CREATE DATABASE default_db OWNER myuser;
+
+-- 3️⃣ Exit psql shell (Linux command line)
+-- \q exits psql shell to go back to Linux prompt
+\q
+
+-- 4️⃣ Login as 'myuser' from Linux shell
+-- -U specifies the user
+-- -d specifies the database
+-- -h specifies the host (localhost for local machine)
+psql -U myuser -d default_db -h localhost
+
+-- 5️⃣ Create a role with login
+-- Purpose: This is a read-only role for reporting/analytics
+-- Roles can group multiple privileges and can be assigned to multiple users
 CREATE ROLE readonly LOGIN PASSWORD 'readonlypass';
 
--- Create user with privileges
+-- 6️⃣ Create a user with privileges
+-- Purpose: 'dbadmin' can create new databases (CREATEDB)
+-- Ideal for admin tasks without giving full superuser rights
 CREATE USER dbadmin WITH PASSWORD 'securepass' CREATEDB;
 
--- Superuser (full access, avoid in production)
+-- 7️⃣ Superuser (full access)
+-- Purpose: 'superyasin' can do anything on the PostgreSQL server
+-- Should be avoided for production apps to minimize security risk
 CREATE USER superyasin WITH PASSWORD 'superpass' SUPERUSER;
 
--- Alter user
+-- 8️⃣ Alter user
+-- Purpose: Update user privileges or password
+-- Example: allow 'myuser' to create databases
 ALTER USER myuser WITH CREATEDB;
+
+-- Example: change password for 'myuser'
 ALTER USER myuser WITH PASSWORD 'newpass';
 
--- Drop user
+-- 9️⃣ Drop user
+-- Purpose: Remove a user from PostgreSQL
+-- Only works if the user doesn't own any database/objects
 DROP USER myuser;
 ```
 
@@ -133,16 +160,34 @@ DROP DATABASE mydb;
 
 <br>
 
+```text
+PostgreSQL Server
+ └─ Database (e.g., mydb)
+     └─ Schema (e.g., public, app_schema)
+         ├─ Tables (users, orders)
+         ├─ Views
+         ├─ Functions
+         └─ Sequences
+```
+
 
 ```sql
--- Create schema
+-- 1️⃣ Create a schema
+-- Purpose: A schema is a namespace/container for database objects (tables, views, functions)
+-- It helps organize objects and manage privileges separately from other schemas
+-- Authorization: 'myuser' will own this schema and can create/alter objects inside it
 CREATE SCHEMA app_schema AUTHORIZATION myuser;
 
--- List schemas
+-- 2️⃣ List all schemas in the current database
+-- \dn is a psql meta-command, not a SQL command
+-- It shows schema names and their owners
 \dn
 
--- Drop schema
+-- 3️⃣ Drop a schema
+-- Purpose: Delete the schema and all objects inside it
+-- CASCADE ensures all dependent objects (tables, views, functions) are also removed
 DROP SCHEMA app_schema CASCADE;
+
 ```
 
 <br>
