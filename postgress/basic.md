@@ -25,7 +25,7 @@
 - `#13. Backup & Restore:`
 - `#14. Connect with GUI Tools:`
 
-
+Login as 'myuser' from Linux shell
 
 <br>
 
