@@ -130,6 +130,13 @@ ALTER USER myuser WITH PASSWORD 'newpass';
 -- Purpose: Remove a user from PostgreSQL
 -- Only works if the user doesn't own any database/objects
 DROP USER myuser;
+
+-- If we create a database under the user then:
+-- First, reassign ownership of the database to another user (like postgres)
+ALTER DATABASE DATABASE_NAME OWNER TO postgres;
+
+-- Then drop the user
+DROP USER myuser;
 ```
 
 
@@ -187,6 +194,10 @@ CREATE SCHEMA app_schema AUTHORIZATION myuser;
 -- Purpose: Delete the schema and all objects inside it
 -- CASCADE ensures all dependent objects (tables, views, functions) are also removed
 DROP SCHEMA app_schema CASCADE;
+
+
+-- 4️⃣ Show table from a schema
+\dt SCHEMA_NAME.*
 
 ```
 
