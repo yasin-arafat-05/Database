@@ -84,6 +84,15 @@ List all roles:
 
 <br>
 
+```bash
+# In windows follow this.
+# - After downloding: set path "C:Program Files\PostgreSQL\18\bin",
+# then: psql -U postgres (then give the password)
+
+```
+
+<br>
+
 ```sql
 -- 1️⃣ Create basic user
 -- Purpose: Regular user for applications, can login and work with assigned databases
